@@ -50,7 +50,7 @@ namespace AtlantisDeviceSimulator
                 {
                     observer.OnNext(this);
                 }
-                Thread.Sleep(1000);
+                Thread.Sleep(10000);
             }
             
         }
@@ -58,7 +58,7 @@ namespace AtlantisDeviceSimulator
         private void GenerateNewData()
         {
             Random random = new Random();
-            metric = new Metric(random.NextDouble() * 100,device.Id);
+            metric = new Metric(random.NextDouble() * 100,device.id);
             print("Got new metric: " + JsonConvert.SerializeObject(metric)+Environment.NewLine);
         }
 

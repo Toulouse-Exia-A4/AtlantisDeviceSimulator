@@ -8,20 +8,20 @@ namespace AtlantisDeviceSimulator
 {
     class Metric
     {
-        DateTime date;
-        string id;
-        private double value;
+        DateTime _date;
+        string _id;
+        private double _value;
 
         public Metric(double value,string deviceId)
         {
-            Value = value;
-            Date = DateTime.Now;
-            Id = deviceId;
+            this.value = value;
+            date = DateTime.Now;
+            id = deviceId;
         }
         
 
-        public string Id { get => id; set => id = value; }
-        public DateTime Date { get => date; set => date = value; }
-        public double Value { get => value; set => this.value = value; }
+        public string id { get => _id; set => _id = value; }
+        public DateTime date { get => _date; set => _date = value; }
+        public double value { get => _value; set => this._value = value; }
     }
 }

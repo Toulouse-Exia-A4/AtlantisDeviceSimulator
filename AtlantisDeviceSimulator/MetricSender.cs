@@ -23,7 +23,12 @@ namespace AtlantisDeviceSimulator
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(ConfigurationManager.AppSettings["BaseDeviceEndpoint"]);
             var data = JsonConvert.SerializeObject(metric);
-            var result = client.PostAsync("/device/"+metric.Id+"/telemetry/", new StringContent(data, Encoding.UTF8, "application/json")).Result;
+            var result = client.PostAsync("/DeviceService/device/"+metric.id+"/telemetry", new StringContent(data, Encoding.UTF8, "application/json")).Result;
+            string resultString = result.Content.ReadAsStringAsync().Result;
+            if (result.StatusCode != System.Net.HttpStatusCode.OK)
+            {
+                throw new Exception();
+            }
         }
 
         
