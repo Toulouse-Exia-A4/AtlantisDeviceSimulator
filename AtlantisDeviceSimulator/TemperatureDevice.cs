@@ -10,7 +10,7 @@ namespace AtlantisDeviceSimulator
 {
 
 
-    delegate void StringArgReturningVoidDelegate(string text);
+
     class TemperatureDevice : IDevice, IObservable<IDevice>
     {
         List<IObserver<IDevice>> observers;
@@ -50,7 +50,7 @@ namespace AtlantisDeviceSimulator
                 {
                     observer.OnNext(this);
                 }
-                Thread.Sleep(10000);
+                Thread.Sleep(1000);
             }
             
         }

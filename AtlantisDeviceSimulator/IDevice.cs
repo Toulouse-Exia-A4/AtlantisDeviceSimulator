@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AtlantisDeviceSimulator
 {
-    interface IDevice
+    public interface IDevice
     {
         Metric GetMetric();
         void SendMessage(string message);

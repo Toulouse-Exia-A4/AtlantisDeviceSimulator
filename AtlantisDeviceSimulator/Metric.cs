@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AtlantisDeviceSimulator
 {
-    class Metric
+    public class Metric
     {
         DateTime _date;
         string _id;

@@ -10,10 +10,18 @@ namespace AtlantisDeviceSimulator
 {
 
     
-    class DeviceManager : IObserver<IDevice>
+    public class DeviceManager : IObserver<IDevice>
     {
-        StringArgReturningVoidDelegate print;
+        private StringArgReturningVoidDelegate print;
         private IDisposable unsubscriber;
+        Dictionary<string, IDevice> devices;
+
+        internal StringArgReturningVoidDelegate Print { get => print; set => print = value; }
+
+        public DeviceManager()
+        {
+            devices = new Dictionary<string, IDevice>();
+        }
         public void OnCompleted()
         {
             unsubscriber.Dispose();
@@ -24,17 +32,24 @@ namespace AtlantisDeviceSimulator
 
         }
 
+        public void ForwardMessage(string id,string message)
+        {
+            devices[id].SendMessage(message);
+        }
+
         public void OnNext(IDevice device)
         {
-            print("Sending new metric " + JsonConvert.SerializeObject(device.GetMetric())+Environment.NewLine);
-            MetricSender metric=new MetricSender(device.GetMetric()); //Thread it
+            Print("Sending new metric " + JsonConvert.SerializeObject(device.GetMetric())+Environment.NewLine);
+            MetricSender metric=new MetricSender(device.GetMetric());
+            if (!devices.ContainsKey(device.GetMetric().id))
+                devices.Add(device.GetMetric().id, device);
             Thread thread = new Thread( metric.Send);
             thread.Start();
         }
 
-        public void setPrint(StringArgReturningVoidDelegate del)
+        public void SetPrint(StringArgReturningVoidDelegate del)
         {
-            print = del;
+            Print = del;
         }
 
     }
