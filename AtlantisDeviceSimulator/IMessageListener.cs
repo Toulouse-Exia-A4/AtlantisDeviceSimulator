@@ -16,8 +16,8 @@ namespace AtlantisDeviceSimulator
         [OperationContract]
         [WebInvoke(
         Method = "POST",
-        UriTemplate = "/",
-        BodyStyle = WebMessageBodyStyle.Bare,
+        UriTemplate = "/message",
+        BodyStyle = WebMessageBodyStyle.Wrapped,
         RequestFormat = WebMessageFormat.Json,
         ResponseFormat = WebMessageFormat.Json
         )]
